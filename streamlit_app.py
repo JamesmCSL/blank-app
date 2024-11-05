@@ -23,7 +23,7 @@ for col in df.columns:
     df = df[~df[col].isin([-200])]
 
 # App
-st.title("CloudSecure Ltd Data Dashboard")
+st.title("Italian Roadside Data Dashboard")
 st.divider()
 st.write(
     "Welcome to the dashboard. Let's look at some Italian town data from 2004!"
