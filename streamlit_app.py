@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from ucimlrepo import fetch_ucirepo
-from streamlit_pandas_profiling import st_profile_report
 from datetime import datetime as dt
 
 # Get data
