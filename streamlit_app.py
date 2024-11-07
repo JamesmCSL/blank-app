@@ -24,6 +24,7 @@ for col in df.columns:
 
 # App
 st.title("Italian Roadside Data Dashboard")
+st.divider()
 
 date_min = dt.strptime(df.DateTime.min().strftime('%Y-%m-%d'), '%Y-%m-%d')
 date_max = dt.strptime(df.DateTime.max().strftime('%Y-%m-%d'), '%Y-%m-%d')
@@ -34,12 +35,6 @@ from_date, to_date = st.slider(
     value = [date_min, date_max],
     label='Please select a date range:'
 )
-
-selected_molecules = st.multiselect(
-    "Which metal oxide concentrations would you like to measure?",
-    ['CO', 'NO2', 'C6H6', 'NOx'],
-    ['CO', 'NO2', 'C6H6', 'NOx']
-    )
 
 st.divider()
 
@@ -52,7 +47,6 @@ year_maxH = df['RH'].max()
 year_lowH = df['RH'].min()
 
 filtered_df = df[(df['DateTime'] <= to_date) & (from_date <= df['DateTime'])]
-filtered_df = filtered_df[['DateTime', 'T', 'RH'] + selected_molecules]
 
 maxT = filtered_df['T'].max()
 lowT = filtered_df['T'].min()
@@ -88,6 +82,7 @@ with col7:
 
 st.divider()
 
+# filtered_df = filtered_df[['DateTime', 'T', 'RH'] + selected_molecules]
 filtered_df = filtered_df.groupby(filtered_df['DateTime'].dt.floor('D')).mean()
 
 col1, col2 = st.columns(2)
@@ -95,6 +90,16 @@ with col1:
     st.line_chart(filtered_df, x='DateTime', y='T', y_label='Temperature (°C)', color='#2EA3D7', x_label='')
 with col2:
     st.line_chart(filtered_df, x='DateTime', y='RH', y_label='% Relative Humidity', x_label='')
+
+st.divider()
+
+selected_molecules = st.multiselect(
+    "Which metal oxide concentrations would you like to measure?",
+    ['CO', 'NO2', 'C6H6', 'NOx'],
+    ['CO', 'NO2', 'C6H6', 'NOx']
+    )
+
+st.divider()
 
 units = {'CO': 'mg m⁻³', 'C6H6': 'ug m⁻³', 'NO2': 'ug m⁻³', 'NOx': 'ppb'}
 colors = {'CO': '#b276b2', 'C6H6': '#faa43a', 'NO2': '#60bd68', 'NOx': '#f15854'}
