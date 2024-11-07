@@ -33,7 +33,7 @@ from_date, to_date = st.slider(
     min_value = date_min,
     max_value = date_max,
     value = [date_min, date_max],
-    label='Please select a date range:'
+    label = 'Select a date range:'
 )
 
 st.divider()
@@ -64,6 +64,12 @@ difference_avgH = averageH - year_averageH
 
 maxH = filtered_df['RH'].max()
 differenceH = maxH - year_averageH
+
+col1, col2 = st.columns(2)
+with col1:
+    st.header('Temperature', divider='rainbow')
+with col2:
+    st.header('Humidity', divider='rainbow')
 
 col1, col2, col3, col5, col6, col7 = st.columns(6)
 with col1:
