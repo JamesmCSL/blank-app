@@ -71,15 +71,14 @@ difference_avgH = averageH - year_averageH
 maxH = filtered_df['RH'].max()
 differenceH = maxH - year_averageH
 
-col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+col1, col2, col3, col5, col6, col7 = st.columns(6)
 with col1:
     st.metric('High', f'{maxT.round(2)} °C', f'{difference_maxT.round(2)} °C on year high')
 with col2:
     st.metric('Avg ', f'{averageT.round(2)} °C', f'{difference_avgT.round(2)} °C on year avg')
 with col3:
     st.metric('Low', f'{lowT.round(2)} °C', f'{difference_lowT.round(2)} °C on year low')
-with col4:
-    st.empty()
+    
 with col5:
     st.metric('High', f'{maxH.round(2)}%', f'{difference_maxT.round(2)}% on year high')
 with col6:
